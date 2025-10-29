@@ -27,8 +27,15 @@
     .badge{position:absolute;top:8px;left:8px;background:#b91c1c;color:#fff;font-size:10px;padding:4px 8px;border-radius:999px}
     .sold-by{font-size:11px;color:#7c5b42;margin-top:4px}
     /* Gate */
-    .gate{position:fixed;inset:0;display:flex;align-items:center;justify-content:center;
-      background:rgba(0,0,0,.4);backdrop-filter:blur(2px);z-index:100}
+   .gate{
+      display:flex;
+      position:fixed;
+      inset:0;
+      align-items:center;
+      justify-content:center;
+      background:rgba(0,0,0,.4);
+      z-index:1000;
+    }
     .panel{background:#fff;padding:16px;border-radius:14px;width:min(90vw,400px)}
     .panel h3{margin:0 0 8px}
     .panel label{display:block;font-size:12px;margin-top:8px;color:#6b4c3a}
@@ -176,7 +183,11 @@ document.getElementById("saveGate").onclick = function(){
 };
 
 /* ===== Init ===== */
-if(getBuyer()){ showGate(false); }
+if(getBuyer()){ 
+  showGate(false);
+} else { 
+  showGate(true);
+}
 Promise.all([apiGet({fn:"items"}), apiGet({fn:"status"})])
   .then(([items, statusList])=>{
     ITEMS = Array.isArray(items) ? items : [];
