@@ -1,0 +1,131 @@
+<!doctype html>
+<html lang="id">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Rafi & Amanda — Wedding Gift Registry</title>
+  <meta name="description" content="Wedding Gift Registry Rafi & Amanda" />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap" rel="stylesheet">
+  <style>
+    :root{--bg:#f8f7f4;--text:#4E1F00;--brand:#4E1F00;}
+    body{font-family:Inter,Arial,sans-serif;background:var(--bg);color:var(--text);margin:0;padding:0}
+    .wrap{max-width:430px;margin:0 auto;padding:16px}
+    header{background:#fff;padding:14px;border-radius:12px;margin-bottom:16px}
+    h1{font-size:20px;margin:0 0 6px}
+    .sub{font-size:13px;color:#6b4c3a}
+    .grid{display:grid;grid-template-columns:repeat(2,1fr);gap:12px}
+    .card{background:#fff;border-radius:18px;overflow:hidden;box-shadow:0 4px 8px rgba(0,0,0,.05);position:relative}
+    .thumb{aspect-ratio:3/4;width:100%;object-fit:cover}
+    .info{padding:8px 10px}
+    .price{font-weight:700;font-size:13px;margin:4px 0}
+    .cta a{display:block;background:var(--brand);color:#fff;text-align:center;text-decoration:none;padding:8px 10px;border-radius:12px;margin:6px 10px;font-weight:600}
+    .badge{position:absolute;top:8px;left:8px;background:#b91c1c;color:#fff;font-size:10px;padding:4px 8px;border-radius:999px}
+    .sold-by{font-size:11px;color:#7c5b42;margin-top:4px}
+    .gate{position:fixed;inset:0;display:flex;align-items:center;justify-content:center;background:rgba(0,0,0,.4);backdrop-filter:blur(3px);z-index:100}
+    .panel{background:#fff;padding:16px;border-radius:14px;width:min(90vw,400px)}
+    .panel input{width:100%;margin-top:8px;padding:8px;border:1px solid #ccc;border-radius:8px}
+    .panel button{margin-top:12px;padding:8px 12px;border:none;border-radius:8px;cursor:pointer;font-weight:700}
+    .btn-main{background:var(--brand);color:#fff}
+    .btn-alt{background:#fff;border:1px solid #ccc}
+  </style>
+</head>
+<body>
+<div class="wrap">
+  <header>
+    <h1>Rafi & Amanda — Gift Registry</h1>
+    <p class="sub">Kehadiran kalian sudah cukup 💛 Tapi jika ingin berbagi hadiah, pilih item di bawah dan tekan Checkout untuk membuka Shopee.</p>
+  </header>
+
+  <div class="grid" id="grid"></div>
+
+  <footer style="text-align:center;font-size:12px;margin:20px 0;color:#7c5b42">
+    Made with ❤️ by Rafi & Amanda
+  </footer>
+</div>
+
+<!-- FORM GATE -->
+<div class="gate" id="gate">
+  <div class="panel">
+    <h3>Isi data dulu ya 👋</h3>
+    <input id="buyerName" placeholder="Nama" />
+    <input id="buyerPhone" placeholder="No HP" />
+    <input id="buyerEmail" placeholder="Email" />
+    <button class="btn-main" id="saveGate">Lanjut</button>
+  </div>
+</div>
+
+<script>
+const ENDPOINT_URL = "https://script.google.com/macros/s/AKfycbyo2xde-rKUogdQtwuNb_onCMS0ZLMKhQmNFmMe8tNfHboOvx5-Nh8a7OaxQZ7FWbc/exec";
+
+const items = [
+  {id:"air-fryer-digital-3-l-ey145",name:"Air Fryer Digital 3L EY145",price:660000,image:"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQf8Zva_l8-vuHcyKi7VLEJfh-6sVo_lrcVi2oa4PxRSlUyGlkFzHdXbb0TPZJ58kaXyds&usqp=CAU",link:"https://s.shopee.co.id/gHpBcgUND"},
+  {id:"dispenser-bss-4600",name:"Dispenser BSS 4600",price:1300000,image:"https://images.renos.id/production/assets/portal-assets/827/product/images/ljSC1WTkuL.webp",link:"https://s.shopee.co.id/8ANq6uHjEp"},
+  {id:"setrika-hd1172",name:"Setrika HD1172",price:300000,image:"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR-iKdPq9nYCtQo_5o_lch0Cp8IMk4SJt6_zQ&s",link:"https://s.shopee.co.id/7AVIuul5oP"}
+];
+
+const fmtIDR = n => new Intl.NumberFormat("id-ID",{style:"currency",currency:"IDR",maximumFractionDigits:0}).format(n);
+
+function apiPost(payload){
+  if(!ENDPOINT_URL) return Promise.resolve(null);
+  return fetch(ENDPOINT_URL,{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify(payload)}).then(r=>r.json()).catch(()=>null);
+}
+function apiGet(params){
+  if(!ENDPOINT_URL) return Promise.resolve([]);
+  const url = ENDPOINT_URL + "?" + new URLSearchParams(params);
+  return fetch(url).then(r=>r.json()).catch(()=>[]);
+}
+
+const grid=document.getElementById("grid");
+const statusMap={};
+
+function render(data){
+  grid.innerHTML=data.map(it=>{
+    const s=statusMap[it.id]||{};
+    const sold=s.status==="SOLD";
+    return `<div class="card">
+      ${sold?'<div class="badge">SOLD</div>':""}
+      <img class="thumb" src="${it.image}" alt="${it.name}">
+      <div class="info">
+        <div class="name">${it.name}</div>
+        <div class="price">${fmtIDR(it.price)}</div>
+        ${s.checkout_by?`<div class="sold-by">Checkout by ${s.checkout_by}</div>`:""}
+      </div>
+      <div class="cta"><a href="${it.link}" target="_blank" ${sold?'style="opacity:.5;pointer-events:none"':''}>Checkout di Shopee</a></div>
+    </div>`;
+  }).join("");
+}
+
+function loadStatus(){
+  return apiGet({fn:"status"}).then(data=>{
+    if(Array.isArray(data)){
+      data.forEach(d=>statusMap[d.id]={status:d.status,checkout_by:d.checkout_by});
+    }
+  });
+}
+
+function markCheckout(id,buyerName){
+  return apiPost({action:"checkout",id,checkout_by:buyerName}).then(res=>{
+    if(res&&res.ok){statusMap[id]={status:"SOLD",checkout_by:buyerName};render(items);}
+  });
+}
+
+// GATE
+const gate=document.getElementById("gate");
+document.getElementById("saveGate").onclick=function(){
+  const name=document.getElementById("buyerName").value.trim();
+  const phone=document.getElementById("buyerPhone").value.trim();
+  const email=document.getElementById("buyerEmail").value.trim();
+  if(!name){alert("Nama wajib diisi");return;}
+  const buyer={name,phone,email};
+  localStorage.setItem("buyer",JSON.stringify(buyer));
+  gate.style.display="none";
+  apiPost({action:"register",buyer});
+};
+
+// INIT
+const buyer=localStorage.getItem("buyer");
+if(buyer){gate.style.display="none";}
+loadStatus().then(()=>render(items));
+</script>
+</body>
+</html>
