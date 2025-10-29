@@ -7,45 +7,45 @@
   <meta name="description" content="Wedding Gift Registry Amanda & Rafi" />
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap" rel="stylesheet">
   <style>
-    :root{--bg:#f8f7f4;--text:#4E1F00;--brand:#4E1F00;}
+    :root{--bg:#f8f7f4;--text:#4E1F00;--brand:#4E1F00}
     body{font-family:Inter,Arial,sans-serif;background:var(--bg);color:var(--text);margin:0}
     .wrap{max-width:430px;margin:0 auto;padding:16px}
-    h1{font-size:22px;margin:0 0 6px;text-align:center}
-    .grid{display:grid;grid-template-columns:repeat(2,1fr);gap:12px}
+    header{display:flex;flex-direction:column;align-items:center;text-align:center;gap:12px;
+      background:#fff;border-radius:18px;padding:18px;box-shadow:0 4px 12px rgba(0,0,0,.06)}
+    h1{margin:0;font-size:22px}
+    .logo{width:100px;height:100px;border-radius:999px;object-fit:cover;display:block;border:2px solid rgba(78,31,0,.15)}
+    .sub{white-space:pre-line;font-size:14px;color:#6b4c3a;line-height:1.6;margin:0}
+    .grid{display:grid;grid-template-columns:repeat(2,1fr);gap:12px;margin-top:16px}
     .card{background:#fff;border-radius:18px;overflow:hidden;box-shadow:0 4px 10px rgba(0,0,0,.06);position:relative}
-    .thumb{aspect-ratio:3/4;width:100%;object-fit:cover}
-    .info{padding:8px 10px}
-    .name{font-weight:800;font-size:14px;margin:4px 0}
-    .price{font-weight:700;font-size:13px;margin:4px 0}
-    .cta a{display:block;background:var(--brand);color:#fff;text-align:center;text-decoration:none;padding:8px 10px;border-radius:12px;margin:8px 10px;font-weight:700}
+    .thumb{aspect-ratio:3/4;width:100%;object-fit:cover;background:#eee}
+    .info{padding:10px}
+    .type{font-size:11px;color:#7c5b42;text-transform:uppercase;letter-spacing:.4px;margin-bottom:6px}
+    .name{font-weight:800;font-size:14px;line-height:1.35;margin:0 0 6px}
+    .price{font-weight:700;font-size:13px;margin:0 0 8px}
+    .cta a{display:block;background:var(--brand);color:#fff;text-align:center;text-decoration:none;
+      padding:10px;border-radius:12px;margin:0 10px 12px;font-weight:700}
     .badge{position:absolute;top:8px;left:8px;background:#b91c1c;color:#fff;font-size:10px;padding:4px 8px;border-radius:999px}
     .sold-by{font-size:11px;color:#7c5b42;margin-top:4px}
-    .gate{position:fixed;inset:0;display:flex;align-items:center;justify-content:center;background:rgba(0,0,0,.4);backdrop-filter:blur(3px);z-index:100}
+    /* Gate */
+    .gate{position:fixed;inset:0;display:flex;align-items:center;justify-content:center;
+      background:rgba(0,0,0,.4);backdrop-filter:blur(2px);z-index:100}
     .panel{background:#fff;padding:16px;border-radius:14px;width:min(90vw,400px)}
-    .panel input{width:100%;margin-top:8px;padding:8px;border:1px solid #ccc;border-radius:8px}
-    .panel button{margin-top:12px;padding:8px 12px;border:none;border-radius:8px;cursor:pointer;font-weight:700}
-    .btn-main{background:var(--brand);color:#fff}
-    .btn{background:var(--brand);color:#fff;border:none;padding:10px 14px;border-radius:12px;font-weight:600;cursor:pointer}
-    .btn-outline{background:#fff;color:var(--text);border:1px solid #e5e7eb}
+    .panel h3{margin:0 0 8px}
+    .panel label{display:block;font-size:12px;margin-top:8px;color:#6b4c3a}
+    .panel input{width:100%;margin-top:6px;padding:10px;border:1px solid #ddd;border-radius:10px}
+    .panel button{width:100%;margin-top:12px;padding:10px;border:none;border-radius:10px;background:var(--brand);color:#fff;font-weight:700;cursor:pointer}
+    footer{text-align:center;font-size:12px;margin:20px 0;color:#7c5b42}
   </style>
 </head>
 <body>
 <div class="wrap">
 
-  <!-- ===================== HEADER ===================== -->
-  <header style="display:flex;flex-direction:column;align-items:center;text-align:center;gap:14px;padding:18px 12px;background:#fff;border-radius:18px;box-shadow:0 4px 12px rgba(0,0,0,.05);">
-    <!-- GANTI FOTO LOGO DI SINI -->
-    <img class="logo" src="./logo.png" alt="Amanda & Rafi" width="100" height="100" loading="lazy" decoding="async"
-         onerror="this.style.display='none';document.getElementById('logoFallback').hidden=false;">
-    <div id="logoFallback" hidden 
-         style="width:100px;height:100px;border-radius:999px;display:flex;align-items:center;justify-content:center;
-         background:linear-gradient(135deg,#f0e6dc,#e8dccf);color:#4E1F00;font-weight:800;letter-spacing:.5px;
-         border:2px solid rgba(78,31,0,.15);box-shadow:0 2px 8px rgba(0,0,0,.08)">RA</div>
-
+  <!-- HEADER -->
+  <header>
+    <img class="logo" src="./logo.png" alt="Amanda & Rafi" onerror="this.style.display='none';document.getElementById('logoFallback').hidden=false;">
+    <div id="logoFallback" hidden style="width:100px;height:100px;border-radius:999px;display:flex;align-items:center;justify-content:center;background:#efe7dd;color:#4E1F00;font-weight:800;border:2px solid rgba(78,31,0,.15)">RA</div>
     <h1>Amanda & Rafi — Wedding Gift Registry</h1>
-
-    <p class="sub" style="white-space: pre-line; font-size:14px; color:#6b4c3a; margin-top:6px; line-height:1.6;">
-Dear Family & Friends💛
+    <p class="sub">Dear Family & Friends💛
 
 We’re beyond grateful to have you celebrating this new chapter with us. 
 Your presence, prayers, and good wishes are already the greatest gifts we could ask for.
@@ -56,37 +56,30 @@ so we made a simple list of things that’ll help us build it with love and care
 Each piece will remind us of your warmth, laughter, and love that made this day so special. ✨
 
 Love,
-Amanda & Rafi👨🏻‍💼🧕🏻
-    </p>
-
-    <div class="actions" style="display:flex;gap:10px;justify-content:center;margin-top:8px;flex-wrap:wrap;">
-      <button class="btn" id="shareBtn">Share Page</button>
-      <button class="btn btn-outline" id="copyLinkBtn">Copy Link</button>
-    </div>
+Amanda & Rafi👨🏻‍💼🧕🏻</p>
   </header>
-  <!-- ===================== END HEADER ===================== -->
 
+  <!-- GRID -->
   <div class="grid" id="grid"></div>
 
-  <footer style="text-align:center;font-size:12px;margin:20px 0;color:#7c5b42">
-    Made with ❤️ by Amanda & Rafi
-  </footer>
+  <footer>Made with ❤️ by Amanda & Rafi</footer>
 </div>
 
-<!-- ===================== GATE FORM ===================== -->
+<!-- GATE FORM -->
 <div class="gate" id="gate">
   <div class="panel">
     <h3>Isi data dulu ya 👋</h3>
-    <input id="buyerName" placeholder="Nama" />
-    <input id="buyerPhone" placeholder="No HP" />
-    <input id="buyerEmail" placeholder="Email" />
-    <button class="btn-main" id="saveGate">Lanjut</button>
+    <label>Nama<input id="buyerName" placeholder="Nama" /></label>
+    <label>No HP<input id="buyerPhone" placeholder="08xxxx" /></label>
+    <label>Email<input id="buyerEmail" placeholder="email@contoh.com" /></label>
+    <button id="saveGate">Lanjut</button>
   </div>
 </div>
 
 <script>
-const ENDPOINT_URL = "https://script.google.com/macros/s/AKfycbzL_mWFXiOKljpmUE7EcZy-L9xD436dD-cq3B3PrcyvNSMW64kR9g9SOFJpuiOq_24/exec"; // ganti dgn link web app script kamu
+const ENDPOINT_URL = "https://script.google.com/macros/s/AKfycbzZEgJTU85xHa07FkpJiiEH0btx3QvfKFcTDhKZdFNRj5jQp6NWUmkqNsq2XmKtvls/exec"; // isi dengan URL Web App Script kamu
 
+/* ===== Helpers API (tanpa await) ===== */
 function apiGet(params){
   if(!ENDPOINT_URL) return Promise.resolve([]);
   const url = ENDPOINT_URL + "?" + new URLSearchParams(params||{});
@@ -97,14 +90,15 @@ function apiPost(payload){
   return fetch(ENDPOINT_URL,{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify(payload)})
     .then(r=>r.json()).catch(()=>({ok:false}));
 }
-
 const fmtIDR = n => new Intl.NumberFormat("id-ID",{style:"currency",currency:"IDR",maximumFractionDigits:0}).format(n);
 
+/* ===== State ===== */
 const grid = document.getElementById("grid");
 const gate = document.getElementById("gate");
-let ITEMS = [];
-let STATUS = {};
+let ITEMS = [];    // full items dari Sheet
+let STATUS = {};   // id -> {status, checkout_by}
 
+/* ===== Render ===== */
 function render(list){
   grid.innerHTML = list.map(it=>{
     const st = STATUS[it.id] || {status: it.status || "", checkout_by: it.checkout_by || ""};
@@ -113,16 +107,18 @@ function render(list){
       ${sold ? '<div class="badge">SOLD</div>' : ''}
       <img class="thumb" src="${it.image}" alt="${it.name}">
       <div class="info">
-        <div class="name">${it.name}</div>
+        ${it.type ? `<div class="type">${it.type}</div>` : ""}
+        <h3 class="name">${it.name}</h3>
         <div class="price">${fmtIDR(it.price)}</div>
         ${st.checkout_by ? `<div class="sold-by">Checkout by ${st.checkout_by}</div>` : ""}
       </div>
       <div class="cta">
-        <a data-checkout href="${it.link}" target="_blank" rel="noopener" ${sold?'style="opacity:.5;pointer-events:none"':''}>Checkout di Shopee</a>
+        <a data-checkout href="${it.link}" target="_blank" rel="noopener" ${sold?'style="opacity:.5;pointer-events:none"':''}>Checkout</a>
       </div>
     </article>`;
   }).join("");
 
+  // attach handler checkout
   grid.querySelectorAll('a[data-checkout]').forEach(a=>{
     a.addEventListener('click', (ev)=>{
       ev.preventDefault();
@@ -163,12 +159,12 @@ function render(list){
   });
 }
 
+/* ===== Gate ===== */
 function getBuyer(){
   try { return JSON.parse(localStorage.getItem("buyer") || "null"); }
   catch(_){ return null; }
 }
 function showGate(v){ gate.style.display = v ? "flex" : "none"; }
-
 document.getElementById("saveGate").onclick = function(){
   const name  = document.getElementById("buyerName").value.trim();
   const phone = document.getElementById("buyerPhone").value.trim();
@@ -180,6 +176,7 @@ document.getElementById("saveGate").onclick = function(){
   apiPost({action:"register", buyer});
 };
 
+/* ===== Init ===== */
 if(getBuyer()){ showGate(false); }
 Promise.all([apiGet({fn:"items"}), apiGet({fn:"status"})])
   .then(([items, statusList])=>{
