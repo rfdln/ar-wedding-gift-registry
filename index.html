@@ -107,8 +107,14 @@ function render(data){
 function loadStatus(){
   return apiGet({fn:"status"}).then(data=>{
     if(Array.isArray(data)){
-      data.forEach(d=>statusMap[d.id]={status:d.status,checkout_by:d.checkout_by});
+      data.forEach(d=>{
+        statusMap[d.id] = {status:d.status, checkout_by:d.checkout_by};
+      });
     }
+    // Tetap render semua item meski status kosong
+    render(items);
+  }).catch(()=>{
+    render(items);
   });
 }
 
@@ -132,9 +138,9 @@ document.getElementById("saveGate").onclick=function(){
 };
 
 // INIT
-const buyer=localStorage.getItem("buyer");
-if(buyer){gate.style.display="none";}
-loadStatus().then(()=>render(items));
+const buyer = localStorage.getItem("buyer");
+if(buyer){ gate.style.display="none"; }
+loadStatus();
 </script>
 </body>
 </html>
